@@ -7,14 +7,36 @@
 # View事件体系源码分析
 整体上，点击事件是按照Activity->Window(PhoneWindow)->DecorView->View顺序进行分发的。
 
+**首先看Activity的dispatchTouchEvent()方法**
 ```java
 public boolean dispatchTouchEvent(MotionEvent ev) {
+    //当用户执行任何交互操作时，系统会自动调用该方法。主要是为了使屏幕保持交互状态等效果。
     if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-        onUserInteraction(); //通知应用程序，用户正在与应用程序进行交互
+        //通知应用程序，用户正在与应用程序进行交互
+        onUserInteraction(); 
     }
+    //通过Window分发事件，如果Window中有子View消耗了点击事件，则返回true，不再执行Activity的onTouchEvent方法
     if (getWindow().superDispatchTouchEvent(ev)) {
         return true;
     }
     return onTouchEvent(ev);
+}
+```
+**接着看getWindow().superDispatchTouchEvent()**
+```java
+// Activity的attach方法中，实例化了PhoneWindow对象
+// mWindow = new PhoneWindow(this, window, activityConfigCallback);
+public Window getWindow() {
+    return mWindow;
+}
+
+// Window实际上是将分发事件交给了DecorView这个根ViewGroup进行
+// DecorView实例化是通过setContentView()->installDecor()->generateDecor()创建
+public boolean superDispatchTouchEvent(MotionEvent event) {
+    return mDecor.superDispatchTouchEvent(event);
+}
+
+public boolean superDispatchTouchEvent(MotionEvent event) {
+    return super.dispatchTouchEvent(event);
 }
 ```
