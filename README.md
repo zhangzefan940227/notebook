@@ -36,7 +36,9 @@ public boolean superDispatchTouchEvent(MotionEvent event) {
     return mDecor.superDispatchTouchEvent(event);
 }
 
+//此处开始事件分发的基本流程
 public boolean superDispatchTouchEvent(MotionEvent event) {
     return super.dispatchTouchEvent(event);
 }
 ```
+
