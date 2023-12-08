@@ -43,6 +43,7 @@ public boolean superDispatchTouchEvent(MotionEvent event) {
     return super.dispatchTouchEvent(event);
 }
 ```
+FrameLayout中没有重写 dispatchTouchEvent()，直接看其父类，ViewGroup
 **接下来就是ViewGroup中的事件分发流程**
 ```java
 public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -170,3 +171,7 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
     return handled;
 }
 ```
+
+
+# RecycleView
+https://blog.csdn.net/huweiliyi/article/details/105779329
