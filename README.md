@@ -6,6 +6,8 @@
 6. https://www.zhihu.com/question/595810238
 7. https://www.jianshu.com/u/167b54662111 努比亚团队
 8. https://juejin.cn/post/6917056099069722632 ViewGroup.dispatchTouchEvent
+9. https://blog.csdn.net/huweiliyi/article/details/105779329
+
 # View事件分发源码分析
 整体上，点击事件是按照Activity->Window(PhoneWindow)->DecorView->View顺序进行分发的。
 
@@ -174,5 +176,127 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
 
 
 # RecycleView
-https://blog.csdn.net/huweiliyi/article/details/105779329
-https://github.com/huxq17/XRefreshView
+## 基本使用
+**添加依赖**
+在在build.gradle文件中添加依赖
+```java
+dependencies {
+    ...
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+}
+```
+**添加一个列表item的布局文件item_xxx.xml**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="30dp"
+                android:text="这是一段文本"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+```
+**定义Adapter、ViewHolder类**
+```java
+public class VerticalAdapter extends RecyclerView.Adapter<VerticalViewHolder>{
+    @NonNull
+    @Override
+    public VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        // LayoutInflater用于加载布局，from方法获取LayoutInflater对象
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+
+        // 获取RecycleView中保存的每个item的布局
+        RecyclerView itemView = (RecyclerView) layoutInflater.inflate(R.layout.item_vertical, parent, false);
+
+        // 将itemView返回给ViewHolder
+        return new VerticalViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull VerticalViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+}
+
+class VerticalViewHolder extends RecyclerView.ViewHolder {
+
+    public VerticalViewHolder(@NonNull View itemView) {
+        super(itemView);
+    }
+}
+```
+**在MainActivity中添加RecycleView相关逻辑**
+```java
+public class VerticalRecycleViewActivity extends AppCompatActivity {
+
+    RecyclerView mRecycleView;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+
+        setContentView(R.layout.activity_vertical);
+
+        // 创建RecycleView对象
+        mRecycleView = findViewById(R.id.vertical_rv);
+
+        // 设置RecycleView的方向：水平/垂直
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        // 设置LayoutManager
+        mRecycleView.setLayoutManager(linearLayoutManager);
+
+        // 设置Adapter绑定数据
+        mRecycleView.setAdapter(new VerticalAdapter());
+        super.onCreate(savedInstanceState, persistentState);
+
+    }
+}
+```
+## 布局管理器
+RecyclerView提供了三种布局管理器：
+- LinearLayoutManager 线性布局管理器
+- StaggeredGridLayoutManager 瀑布流布局管理器
+- GridLayoutManager 网格布局管理器
+这三种布局管理器都是通过setLayoutManager方法来设置, 以LinearLayoutManager为例，只需要在MainActivity中添加该布局管理器即可。
+有两种方式都可以实现该功能。
+1. **构造方法中直接传入布局参数**
+```java
+LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+```
+2. **也可以通过 setOrientation() 方法设置布局参数**
+```java
+LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+mRecyclerView.setLayoutManager(layoutManager);
+```
