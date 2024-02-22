@@ -33,3 +33,20 @@
 源文件主要写实现头文件中已经声明的那些函数的具体代码。
 
 需要注意的是，**开头必须#include一下实现的头文件，以及要用到的头文件**。
+
+# 最值
+
+## 直接定义
+```cpp
+const unsigned int MAX_UINT = 0xffffffff;
+const int  MAX_INT = 0x7fffffff;
+const int  MIN_INT  = 0x80000000;
+```
+
+## 使用系统库函数
+
+```cpp
+std::numeric_limits<unsigned int>::max()
+std::numeric_limits<int>::max()
+std::numeric_limits<int>::min()
+```
