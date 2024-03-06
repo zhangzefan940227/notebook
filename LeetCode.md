@@ -1,68 +1,141 @@
-代码随想录算法训练营第八天|541.反转字符串II，
+代码随想录算法训练营第十六天|102.二叉树层序遍历，199.二叉树的右视图，637.二叉树的层平均值，429. N 叉树的层序遍历
 
-# 541.反转字符串II
+# 102.二叉树层序遍历
+
 ## 题目
-给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
 
-如果剩余字符少于 k 个，则将剩余字符全部反转。
-如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。
-
-示例 1：
-> 输入：s = "abcdefg", k = 2
-> 输出："bacdfeg"
-
-示例 2：
-> 输入：s = "abcd", k = 2
-> 输出："bacd"
+给你二叉树的根节点 `root` ，返回其节点值的 **层序遍历** 。 （即逐层地，从左到右访问所有节点）。
 
 ## 解题思路
-- 使用一个for循环，i每次移动2k个距离
-- 两个判断条件： `剩余字符 < k`、 `k <= 剩余字符 < 2k`
+
+- 需要借用队列实现，队列先进先出，符合一层一层遍历的逻辑
+
 
 ## 代码
 ```cpp
-
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        queue<TreeNode*> que;
+        vector<int> temp;
+        if (root != nullptr) que.push(root);
+        while(!que.empty()) {
+            int size = que.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode* node = que.front();
+                temp.push_back(node->val);
+                que.pop();
+                if (node->left != nullptr) que.push(node->left);
+                if (node->right != nullptr) que.push(node->right);
+            }
+            result.push_back(temp);
+        }
+        return result;
+    }
+};
 ```
 
-# 54.替换数字（卡码网）
+# 199.二叉树的右视图
 ## 题目
+给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
 
 ## 解题思路
 
+- 题目意思和立体几何三视图中的左视图是类似的概念，只不过这个是右视图
+- 和102题目思路差不多，只需要增加个条件，在遍历到每层最后一个的时候，加入到vector中，即遍历条件为`i==size-1`
+
 ## 代码
 ```cpp
-
-
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> result;
+        queue<TreeNode*> que;
+        if (root != nullptr) que.push(root);
+        while(!que.empty()) {
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode* node = que.front();
+                que.pop();
+                if (i == (size -1)) result.push_back(node);
+                if (node->left != nullptr) que.push(node->left);
+                if (node->right != nullptr) que.push(node->right);
+            }
+        }
+        return result;
+    }
+};
 ```
 
-# 151.翻转字符串里的单词
+# 637.二叉树的层平均值
+
 ## 题目
 
-给你一个字符串 s ，请你反转字符串中 单词 的顺序。
-
-单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。
-
-返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。
-
-注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。
-
-示例 1：
-> 输入：s = "the sky is blue"
-> 输出："blue is sky the"
-
-示例 2：
-> 输入：s = "  hello world  "
-> 输出："world hello"
-> 解释：反转后的字符串中不能存在前导空格和尾随空格。
-
-示例 3：
-> 输入：s = "a good   example"
-> 输出："example good a"
-> 解释：如果两个单词间有多余的空格，反转后的字符串需要将单词间的空格减少到仅有一个。
+给定一个非空二叉树的根节点 root , 以数组的形式返回每一层节点的平均值。与实际答案相差 10-5 以内的答案可以被接受。
 
 ## 解题思路
 
+- 使用层序遍历之后，记录每层的所有节点值相加总和，再除以size即可
+
 ## 代码
 ```cpp
+class Solution {
+public:
+    vector<double> averageOfLevels(TreeNode* root) {
+        vector<double> result;
+        queue<TreeNode*> que;
+        if (root != nullptr) que.push(root);
+        while(!que.empty()) {
+            int size = que.size();
+            double sum = 0;
+            for (int i = 0; i < size; i++) {
+                TreeNode* node = que.front();
+                que.pop();
+                sum += node->val;
+                if (node->left != nullptr) que.push(node->left);
+                if (node->right != nullptr) que.push(node->right);
+            }
+            result.push_back(sum/size);
+        }
+        return result;
+    }
+};
+```
 
+# 429. N 叉树的层序遍历
+
+## 题目
+给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）。
+
+## 解题思路
+
+- 层序遍历的主题思路不变
+- 二叉树是left right 两个子节点，N叉树N个子节点，for循环遍历N个节点即可
+
+
+## 代码
+```cpp
+class Solution {
+public:
+    vector<vector<int>> levelOrder(Node* root) {
+        vector<vector<int>> result;
+        queue<TreeNode*> que;
+        vector<int> temp;
+        if (root != nullptr) que.push(root);
+        while(!que.empty()) {
+            int size = que.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode* node = que.front();
+                temp.push_back(node->val);
+                que.pop();
+                for(int j = 0; j < node->children.size(); i++) {
+                    if (node->children[j]) que.push(node->children[j]);
+                }
+            }
+            result.push_back(temp);
+        }
+        return result;
+    }
+};
 ```
