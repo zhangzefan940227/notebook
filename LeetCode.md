@@ -1,141 +1,82 @@
-代码随想录算法训练营第十六天|102.二叉树层序遍历，199.二叉树的右视图，637.二叉树的层平均值，429. N 叉树的层序遍历
+代码随想录算法训练营第二十八天|93. 复原 IP 地址,78. 子集
 
-# 102.二叉树层序遍历
+
+# 93. 复原 IP 地址
 
 ## 题目
 
-给你二叉树的根节点 `root` ，返回其节点值的 **层序遍历** 。 （即逐层地，从左到右访问所有节点）。
+有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 '.' 分隔。
+
+例如："0.1.2.201" 和 "192.168.1.1" 是 有效 IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 无效 IP 地址。
+给定一个只包含数字的字符串 s ，用以表示一个 IP 地址，返回所有可能的有效 IP 地址，这些地址可以通过在 s 中插入 '.' 来形成。你 不能 重新排序或删除 s 中的任何数字。你可以按 任何 顺序返回答案。
+
+示例 1：
+
+输入：s = "25525511135"
+输出：["255.255.11.135","255.255.111.35"]
+
+示例 2：
+
+输入：s = "0000"
+输出：["0.0.0.0"]
+
+示例 3：
+
+输入：s = "101023"
+输出：["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
 
 ## 解题思路
 
-- 需要借用队列实现，队列先进先出，符合一层一层遍历的逻辑
-
+- 与题目131类似，比131题多的是要在字符串中增加 `.` 符号，且数量固定为3，只有这样才能将字符串分割成四段
+- 依旧是回溯三部曲
 
 ## 代码
 ```cpp
-class Solution {
-public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> result;
-        queue<TreeNode*> que;
-        vector<int> temp;
-        if (root != nullptr) que.push(root);
-        while(!que.empty()) {
-            int size = que.size();
-            for(int i = 0; i < size; i++) {
-                TreeNode* node = que.front();
-                temp.push_back(node->val);
-                que.pop();
-                if (node->left != nullptr) que.push(node->left);
-                if (node->right != nullptr) que.push(node->right);
-            }
-            result.push_back(temp);
-        }
-        return result;
-    }
-};
+
 ```
 
-# 199.二叉树的右视图
+
+# 78. 子集
+
 ## 题目
-给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
+
+给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。
+
+解集 不能 包含重复的子集。你可以按 任意顺序 返回解集。
+
+示例 1：
+
+输入：nums = [1,2,3]
+输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 
 ## 解题思路
 
-- 题目意思和立体几何三视图中的左视图是类似的概念，只不过这个是右视图
-- 和102题目思路差不多，只需要增加个条件，在遍历到每层最后一个的时候，加入到vector中，即遍历条件为`i==size-1`
+- 这个需要注意的一点是，不存在剪枝操作，也就是说遍历的树中的所有节点都要写在结果中
+- 这题就是标准的套用模板，并且不需要做特殊操作，只需要遍历所有节点即可
+- 一个小技巧：如果对递归和回溯感觉不清晰，可以在关键位置打印日志，然后根据日志逻辑理清递归嵌套的调用顺序。
 
 ## 代码
 ```cpp
-class Solution {
-public:
-    vector<int> rightSideView(TreeNode* root) {
-        vector<int> result;
-        queue<TreeNode*> que;
-        if (root != nullptr) que.push(root);
-        while(!que.empty()) {
-            int size = que.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode* node = que.front();
-                que.pop();
-                if (i == (size -1)) result.push_back(node);
-                if (node->left != nullptr) que.push(node->left);
-                if (node->right != nullptr) que.push(node->right);
-            }
-        }
-        return result;
-    }
-};
+
 ```
 
-# 637.二叉树的层平均值
+# 90. 子集 II
 
 ## 题目
 
-给定一个非空二叉树的根节点 root , 以数组的形式返回每一层节点的平均值。与实际答案相差 10-5 以内的答案可以被接受。
+给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的 子集（幂集）。
+
+解集 不能 包含重复的子集。返回的解集中，子集可以按 任意顺序 排列。
+
+示例 1：
+
+输入：nums = [1,2,2]
+输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 ## 解题思路
-
-- 使用层序遍历之后，记录每层的所有节点值相加总和，再除以size即可
+- 去重之前记得排序，然后还是根据 nums[i] == nums[i-1] 判断是否重复，和之前的题目类似
 
 ## 代码
 ```cpp
-class Solution {
-public:
-    vector<double> averageOfLevels(TreeNode* root) {
-        vector<double> result;
-        queue<TreeNode*> que;
-        if (root != nullptr) que.push(root);
-        while(!que.empty()) {
-            int size = que.size();
-            double sum = 0;
-            for (int i = 0; i < size; i++) {
-                TreeNode* node = que.front();
-                que.pop();
-                sum += node->val;
-                if (node->left != nullptr) que.push(node->left);
-                if (node->right != nullptr) que.push(node->right);
-            }
-            result.push_back(sum/size);
-        }
-        return result;
-    }
-};
-```
 
-# 429. N 叉树的层序遍历
-
-## 题目
-给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）。
-
-## 解题思路
-
-- 层序遍历的主题思路不变
-- 二叉树是left right 两个子节点，N叉树N个子节点，for循环遍历N个节点即可
-
-
-## 代码
-```cpp
-class Solution {
-public:
-    vector<vector<int>> levelOrder(Node* root) {
-        vector<vector<int>> result;
-        queue<TreeNode*> que;
-        vector<int> temp;
-        if (root != nullptr) que.push(root);
-        while(!que.empty()) {
-            int size = que.size();
-            for(int i = 0; i < size; i++) {
-                TreeNode* node = que.front();
-                temp.push_back(node->val);
-                que.pop();
-                for(int j = 0; j < node->children.size(); i++) {
-                    if (node->children[j]) que.push(node->children[j]);
-                }
-            }
-            result.push_back(temp);
-        }
-        return result;
-    }
-};
 ```
