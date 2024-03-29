@@ -28,6 +28,9 @@ set easymotion
 "设置在光标距离窗口顶部或底部一定行数时，开始滚动屏幕内容的行为
 set scrolloff=15
 
+set history=200
+set clipboard+=unnamed
+
 "--递增搜索功能：在执行搜索（使用 / 或 ? 命令）时，
 "Vim 会在您输入搜索模式的过程中逐步匹配并高亮显示匹配的文本。
 set incsearch
@@ -48,9 +51,9 @@ set surround
 set REplaceWithRegister
 set HERDTree
 
-"-- 关闭报错提示音
 set noerrorbells
 set visualbell
+
 
 " ================================================================================================
 " 🌍🌍🌍 No Leader Keymaps 🌍🌍🌍
@@ -95,8 +98,8 @@ nmap e <action>(NextTab)
 nmap q <action>(PreviousTab)
 
 "代码跳转
-nmap H <action>(Back)
-nmap L <action>(Forward)
+nmap J <action>(Back)
+nmap K <action>(Forward)
 
 "将Ctrl + s 映射为保存文档(也可以在VIM设置里将此快捷键设置为IDEA的快捷键)
 nmap <C-S> <action>(SaveAll)
@@ -533,7 +536,6 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 
 "按下 <C-f> 将在 NERDTree 文件资源管理器中定位当前编辑文件所在的节点，并使其可见(<leader>fl)
 nnoremap <C-f> :NERDTreeFind<CR>
-
 
 " ================================================================================================
 " 🌸🌸🌸 Easymotion 🌸🌸🌸
