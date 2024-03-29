@@ -8,7 +8,6 @@
 Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
-Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 
 "下列插件需要在IDEA中下载:
@@ -45,6 +44,9 @@ set hlsearch
 "--设置返回normal模式时回到英文输入法
 set keep-english-in-normal
 
+set surround
+set REplaceWithRegister
+set HERDTree
 
 
 " ================================================================================================
