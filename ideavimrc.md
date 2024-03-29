@@ -48,6 +48,9 @@ set surround
 set REplaceWithRegister
 set HERDTree
 
+"-- 关闭报错提示音
+set noerrorbells
+set visualbell
 
 " ================================================================================================
 " 🌍🌍🌍 No Leader Keymaps 🌍🌍🌍
@@ -541,6 +544,3 @@ let g:WhichKeyDesc_easymotionkey = "<leader><leader> 快速跳转插件"
 
 nmap s <Plug>(easymotion-s)
 let g:WhichKeyDesc_easymotion = "s 快速跳转"
-
-set noerrorbells
-set visualbell
