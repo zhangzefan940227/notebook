@@ -1,4 +1,5 @@
 
+
 "该“中文版”指whichkey的窗口提示为中文
 
 " ================================================================================================
@@ -26,7 +27,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 set easymotion
 "设置在光标距离窗口顶部或底部一定行数时，开始滚动屏幕内容的行为
-set scrolloff=15
+set scrolloff=20
 
 set history=200
 set clipboard+=unnamed
@@ -42,7 +43,7 @@ set ignorecase
 set hlsearch
 
 "--设置相对行号 和 当前行的绝对行号
-"-- set number relativenumber
+set number
 
 "--设置返回normal模式时回到英文输入法
 set keep-english-in-normal
@@ -54,6 +55,9 @@ set HERDTree
 set noerrorbells
 set visualbell
 
+"--将 jj 和 jk 映射为 <Esc>
+"jj和jk为主流配置，可按喜好自行调整
+imap jk <Esc>
 
 " ================================================================================================
 " 🌍🌍🌍 No Leader Keymaps 🌍🌍🌍
@@ -94,8 +98,8 @@ nmap ma <action>(ToggleBookmark)
 let g:WhichKeyDesc_bookmark = "ma 书签"
 
 "切换标签页
-nmap e <action>(NextTab)
-nmap q <action>(PreviousTab)
+nmap L <action>(NextTab)
+nmap H <action>(PreviousTab)
 
 "代码跳转
 nmap J <action>(Back)
@@ -259,33 +263,39 @@ let g:WhichKeyDesc_LeaderKeymap= "<leader> 🌟🌟🌟紫色为二级目录🌟
 
 
 "========== c ==========
-let g:WhichKeyDesc_CodeAndClose = "<leader>c Code&关闭"
+let g:WhichKeyDesc_CodeAndClose = "<leader>c 关闭窗口"
 
 "关闭所有标签页
 let g:WhichKeyDesc_CodeAndClose_CloseAllEditors = "<leader>ca 关闭所有标签页"
 nmap <leader>ca <action>(CloseAllEditors)
+
 "关闭当前标签页
 let g:WhichKeyDesc_CodeAndClose_CloseEditor = "<leader>cd 关闭当前标签页"
 nmap <leader>cd :action CloseEditor<CR>
-"代码自动补全
-let g:WhichKeyDesc_CodeAndClose_CodeCompletion = "<leader>cc 代码自动补全"
-nmap <leader>cc <action>(CodeCompletion)
+
+" 代码自动补全
+" let g:WhichKeyDesc_CodeAndClose_CodeCompletion = "<leader>cc 代码自动补全"
+" nmap <leader>cc <action>(CodeCompletion)
+
 "关闭其他标签页
 let g:WhichKeyDesc_CodeAndClose_CloseAllEditorsButActive = "<leader>co 关闭其他标签页"
 nmap <leader>co :action CloseAllEditorsButActive<CR>
 
 
 "========== d ==========
-let g:WhichKeyDesc_DeBugOrDelete= "<leader>d 调试&删除"
-"打断点/解除断点
-let g:WhichKeyDesc_DebugOrDelete_BreakPoint = "<leader>dp 打断点/解除断点 "
-nmap <leader>dp <Action>(ToggleLineBreakpoint)
-"调试
-let g:WhichKeyDesc_DebugOrDelete_DeBug = "<leader>db 调试"
-nmap <leader>db <Action>(Debug)
-"在可视模式中：删除选择的文本并复制到剪切板
-let g:WhichKeyDesc_DebugOrDelete_DeleteAndCopyToClipboard = "<leader>dd 删除并复制到剪切板"
-vmap <leader>dd "+d
+" let g:WhichKeyDesc_DeBugOrDelete= "<leader>d 调试&删除"
+" 
+" " 打断点/解除断点
+" let g:WhichKeyDesc_DebugOrDelete_BreakPoint = "<leader>dp 打断点/解除断点 "
+" nmap <leader>dp <Action>(ToggleLineBreakpoint)
+" 
+" "调试
+" let g:WhichKeyDesc_DebugOrDelete_DeBug = "<leader>db 调试"
+" nmap <leader>db <Action>(Debug)
+" 
+" " 在可视模式中：删除选择的文本并复制到剪切板
+" let g:WhichKeyDesc_DebugOrDelete_DeleteAndCopyToClipboard = "<leader>dd 删除并复制到剪切板"
+" vmap <leader>dd "+d
 
 
 "========== e ==========
@@ -295,23 +305,31 @@ nmap <leader>e <action>(ActivateProjectToolWindow)
 
 
 "========== f ==========
-let g:WhichKeyDesc_FindOrFormat = "<leader>f 查找&格式化"
+let g:WhichKeyDesc_FindOrFormat = "<leader>f 查找"
 
-"快速 导航/查找 项目中的其他文件(Ctrl + n)
+" 快速 导航/查找 项目中的其他文件(Ctrl + Shift + n)
 let g:WhichKeyDesc_FindOrFormat_FindFile = "<leader>ff 查找文件"
 nmap <leader>ff <action>(GotoFile)
-"将当前编辑的文件在项目视图中进行选中定位(Alt + F1)
+
+" 快速 查找 当前文件(Ctrl + f)
+let g:WhichKeyDesc_FindOrFormat_FindText = "<leader>fs 查找字符"
+nmap <leader>fs <action>(Find)
+
+" 在整个项目中查找指定的文本、关键字或正则表达式，包括代码文件、配置文件和其他文件等(Ctrl + Shift + F)
+let g:WhichKeyDesc_FindOrFormat_FindAllText = "<leader>ft 全局查找字符"
+nmap <leader>ft <action>(FindInPath)
+
+" 将当前编辑的文件在项目视图中进行选中定位(Alt + F1)
 let g:WhichKeyDesc_FindOrFormat_FindFileLocation = "<leader>fl 定位文件位置"
 nmap <leader>fl <action>(SelectInProjectView)
-"在整个项目中查找指定的文本、关键字或正则表达式，包括代码文件、配置文件和其他文件等(Ctrl + Shift + F)
-let g:WhichKeyDesc_FindOrFormat_FindText = "<leader>ft 查找字符"
-nmap <leader>ft <action>(FindInPath)
-"打开 "Find Action"（查找动作）对话框(Ctrl + Shift + A)
+
+" 打开 "Find Action"（查找动作）对话框(Ctrl + Shift + A)
 let g:WhichKeyDesc_FindOrFormat_Commands = "<leader>fc 打开查找菜单"
 nmap <leader>fc <action>(GotoAction)
-"重新格式化代码，使其符合预定义的代码样式和规范 \| 优化导入语句，删除未使用的导入，并将导入语句按字母顺序进行排列
-let g:WhichKeyDesc_FindOrFormat_Format = "<leader>fm 格式化代码"
-nmap <leader>fm <action>(ReformatCode) \| <action>(OptimizeImports)
+
+" 重新格式化代码，使其符合预定义的代码样式和规范 \| 优化导入语句，删除未使用的导入，并将导入语句按字母顺序进行排列
+" let g:WhichKeyDesc_FindOrFormat_Format = "<leader>fm 格式化代码"
+" nmap <leader>fm <action>(ReformatCode) \| <action>(OptimizeImports)
 
 
 "========== g ==========
@@ -458,37 +476,44 @@ vmap <leader>t <action>($EditorTranslateAction)
 
 "========== w ==========
 let g:WhichKeyDesc_Windows = "<leader>w 窗口"
-let g:WhichKeyDesc_Windows_Hide = "<leader>ww 关闭提示窗口->a"
+let g:WhichKeyDesc_Windows_Hide = "<leader>ww 关闭提示窗口"
 let g:WhichKeyDesc_Windows_Move = "<leader>wm 移动窗口"
 
-"向右拆分标签页
-let g:WhichKeyDesc_Windows_Move_MoveTabRight = "<leader>wml 向右拆分标签页"
-nmap <leader>wml <action>(MoveTabRight)
-"向下拆分标签页
+" 向右拆分标签页
+let g:WhichKeyDesc_Windows_Move_MoveTabRight = "<leader>wmr 向右拆分标签页"
+nmap <leader>wmr <action>(MoveTabRight)
+
+" 向下拆分标签页
 let g:WhichKeyDesc_Windows_Move_MoveTabDown = "<leader>wmd 向下拆分标签页"
 nmap <leader>wmd <action>(MoveTabDown)
+
 "在另一边打开（前提是有另一边的分割窗口）
-let g:WhichKeyDesc_Windows_Move_MoveEditorToOppositeTabGroup = "<leader>wmo 在另一边打开"
-nmap <leader>wmo <action>(MoveEditorToOppositeTabGroup)
+let g:WhichKeyDesc_Windows_MoveEditorToOppositeTabGroup = "<leader>wo 在另一边打开"
+nmap <leader>wo <action>(MoveEditorToOppositeTabGroup)
+
 "向右复制标签页
-let g:WhichKeyDesc_Windows_Move_SplitVertically = "<leader>wmc 向右复制标签页"
-nmap <leader>wmc <action>(SplitVertically)
+let g:WhichKeyDesc_Windows_SplitVertically = "<leader>wr 向右复制标签页"
+nmap <leader>wr <action>(SplitVertically)
+
+" 向下复制标签页
+let g:WhichKeyDesc_Windows_SplitHorizontally = "<leader>wd 向右复制标签页"
+nmap <leader>wd <action>(SplitHorizontally)
 
 "取消所有分割窗口
 let g:WhichKeyDesc_Windows_UnsplitAll = "<leader>wa 取消所有分割窗口"
 nmap <leader>wa <action>(UnsplitAll)
+
 "关闭当前窗口或分割窗格
 let g:WhichKeyDesc_Windows_closeActiveWindow = "<leader>wc 关闭当前分割窗口"
 nmap <leader>wc <c-w>c
-"取消拆分当前分割窗口
-let g:WhichKeyDesc_Windows_Unsplit = "<leader>wu 取消拆分当前分割窗口"
-nmap <leader>wu <action>(Unsplit)
 
 "关闭提示窗口
 let g:WhichKeyDesc_Windows_Hide_HideActiveWindow = "<leader>wwa 关闭提示窗口"
 nmap <leader>wwa <action>(HideActiveWindow)
 
-
+" 取消拆分当前分割窗口
+" let g:WhichKeyDesc_Windows_Unsplit = "<leader>wu 取消拆分当前分割窗口"
+" nmap <leader>wu <action>(Unsplit)
 
 "========== y ==========
 "普通模式下将 "+ (复制到剪切板）简化为 <leader>y
@@ -542,7 +567,5 @@ nnoremap <C-f> :NERDTreeFind<CR>
 " ================================================================================================
 
 let g:WhichKeyDesc_easymotionkey = "<leader><leader> 快速跳转插件"
-
-
 nmap s <Plug>(easymotion-s)
 let g:WhichKeyDesc_easymotion = "s 快速跳转"
