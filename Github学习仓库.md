@@ -25,7 +25,7 @@
 
 ## Android
 
-[https://github.com/open-android/Android?tab=readme-ov-file](GitHub上最火的Android开源项目)
+[GitHub上最火的Android开源项目](https://github.com/open-android/Android?tab=readme-ov-file)
 
 ## Java
 
