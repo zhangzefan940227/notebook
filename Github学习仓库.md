@@ -25,7 +25,7 @@
 
 ## Android
 
-[https://github.com/open-android/Android?tab=readme-ov-file](Android开源项目)
+[[https://github.com/open-android/Android?tab=readme-ov-file](Android开源项目)](https://github.com/open-android/Android?tab=readme-ov-file)
 
 
 ## Java
