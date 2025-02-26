@@ -27,7 +27,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 set easymotion
 "设置在光标距离窗口顶部或底部一定行数时，开始滚动屏幕内容的行为
-set scrolloff=20
+set scrolloff=10
 
 set history=200
 set clipboard+=unnamed
@@ -90,7 +90,6 @@ let g:WhichKeyDesc_MethodUp = "gm 将光标移动到上一个方法的声明处"
 "跳转到当前接口或抽象类的实现处
 nmap ga <action>(GotoImplementation)
 let g:WhichKeyDesc_GotoImplementation = "ga 跳转到当前接口或抽象类的实现处"
-
 
 
 " bookmark 切换书签
@@ -270,32 +269,31 @@ let g:WhichKeyDesc_CodeAndClose_CloseAllEditors = "<leader>ca 关闭所有标签
 nmap <leader>ca <action>(CloseAllEditors)
 
 "关闭当前标签页
-let g:WhichKeyDesc_CodeAndClose_CloseEditor = "<leader>cd 关闭当前标签页"
-nmap <leader>cd :action CloseEditor<CR>
+let g:WhichKeyDesc_CodeAndClose_CloseEditor = "<leader>cc 关闭当前标签页"
+nmap <leader>cc :action CloseEditor<CR>
 
 " 代码自动补全
-" let g:WhichKeyDesc_CodeAndClose_CodeCompletion = "<leader>cc 代码自动补全"
-" nmap <leader>cc <action>(CodeCompletion)
+let g:WhichKeyDesc_CodeAndClose_CodeCompletion = "<leader>cd 代码自动补全"
+nmap <leader>cd <action>(CodeCompletion)
 
 "关闭其他标签页
 let g:WhichKeyDesc_CodeAndClose_CloseAllEditorsButActive = "<leader>co 关闭其他标签页"
 nmap <leader>co :action CloseAllEditorsButActive<CR>
 
-
 "========== d ==========
-" let g:WhichKeyDesc_DeBugOrDelete= "<leader>d 调试&删除"
-" 
-" " 打断点/解除断点
-" let g:WhichKeyDesc_DebugOrDelete_BreakPoint = "<leader>dp 打断点/解除断点 "
-" nmap <leader>dp <Action>(ToggleLineBreakpoint)
-" 
-" "调试
-" let g:WhichKeyDesc_DebugOrDelete_DeBug = "<leader>db 调试"
-" nmap <leader>db <Action>(Debug)
-" 
-" " 在可视模式中：删除选择的文本并复制到剪切板
-" let g:WhichKeyDesc_DebugOrDelete_DeleteAndCopyToClipboard = "<leader>dd 删除并复制到剪切板"
-" vmap <leader>dd "+d
+let g:WhichKeyDesc_DeBugOrDelete= "<leader>d 调试&删除"
+"
+" 打断点/解除断点
+let g:WhichKeyDesc_DebugOrDelete_BreakPoint = "<leader>dp 打断点/解除断点 "
+nmap <leader>dp <Action>(ToggleLineBreakpoint)
+
+"调试
+let g:WhichKeyDesc_DebugOrDelete_DeBug = "<leader>db 调试"
+nmap <leader>db <Action>(Debug)
+
+" 在可视模式中：删除选择的文本并复制到剪切板
+let g:WhichKeyDesc_DebugOrDelete_DeleteAndCopyToClipboard = "<leader>dd 删除并复制到剪切板"
+vmap <leader>dd "+d
 
 
 "========== e ==========
@@ -362,7 +360,6 @@ let g:WhichKeyDesc_DebugOrDelete_ShowTabbedFileHistory = "<leader>gd 显示文�
 "生成重写方法
 nmap <leader>go <action>(OverrideMethods)
 let g:WhichKeyDesc_DebugOrDelete_OverrideMethods = "<leader>go 生成重写方法"
-
 
 
 "========== h ==========
@@ -496,7 +493,7 @@ let g:WhichKeyDesc_Windows_SplitVertically = "<leader>wr 向右复制标签页"
 nmap <leader>wr <action>(SplitVertically)
 
 " 向下复制标签页
-let g:WhichKeyDesc_Windows_SplitHorizontally = "<leader>wd 向右复制标签页"
+let g:WhichKeyDesc_Windows_SplitHorizontally = "<leader>wd 向下复制标签页"
 nmap <leader>wd <action>(SplitHorizontally)
 
 "取消所有分割窗口
@@ -512,8 +509,8 @@ let g:WhichKeyDesc_Windows_Hide_HideActiveWindow = "<leader>wwa 关闭提示窗�
 nmap <leader>wwa <action>(HideActiveWindow)
 
 " 取消拆分当前分割窗口
-" let g:WhichKeyDesc_Windows_Unsplit = "<leader>wu 取消拆分当前分割窗口"
-" nmap <leader>wu <action>(Unsplit)
+let g:WhichKeyDesc_Windows_Unsplit = "<leader>wu 取消拆分当前分割窗口"
+nmap <leader>wu <action>(Unsplit)
 
 "========== y ==========
 "普通模式下将 "+ (复制到剪切板）简化为 <leader>y
