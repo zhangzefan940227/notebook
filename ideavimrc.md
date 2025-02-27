@@ -17,7 +17,7 @@ Plug 'terryma/vim-multiple-cursors'
 "IdeaVimExtension
 "which-key
 "CodeGlance Pro
-"TranslateAction
+"Translation
 
 
 
