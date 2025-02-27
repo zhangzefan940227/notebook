@@ -1,7 +1,3 @@
-
-
-"该“中文版”指whichkey的窗口提示为中文
-
 " ================================================================================================
 " 🍰🍰🍰 Extensions 🍰🍰🍰
 " ================================================================================================
@@ -49,8 +45,8 @@ set number
 set keep-english-in-normal
 
 set surround
-set REplaceWithRegister
-set HERDTree
+set ReplaceWithRegister
+set NERDTree
 
 set noerrorbells
 set visualbell
@@ -58,6 +54,7 @@ set visualbell
 "--将 jj 和 jk 映射为 <Esc>
 "jj和jk为主流配置，可按喜好自行调整
 imap jk <Esc>
+imap jj <Esc>
 
 " ================================================================================================
 " 🌍🌍🌍 No Leader Keymaps 🌍🌍🌍
@@ -67,14 +64,15 @@ nmap <CR> o<Esc>
 nmap <S-Enter> O<Esc>
 
 "--在普通和插入模式下，向下交换行/向上交换行
-nnoremap <C-j> :m +1<CR>
-nnoremap <C-k> :m -2<CR>
-inoremap <C-j> <Esc> :m +1<CR>gi
-inoremap <C-k> <Esc> :m -2<CR>gi
-xnoremap <C-j> :m '>+1<cr>gv=gv
-xnoremap <C-k> :m '<-2<cr>gv=gv
+nnoremap <A-j> :m +1<CR>
+nnoremap <A-k> :m -2<CR>
+inoremap <A-j> <Esc> :m +1<CR>gi
+inoremap <A-k> <Esc> :m -2<CR>gi
+xnoremap <A-j> :m '>+1<cr>gv=gv
+xnoremap <A-k> :m '<-2<cr>gv=gv
 
 "--格式化（规范化）文本，即对选定的文本进行换行或重排，适应指定的文本宽度。
+
 "全文规范化：Ctrl+Alt+l
 map Q gq
 "跳转到下一个错误或警告
