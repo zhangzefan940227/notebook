@@ -116,6 +116,13 @@ vmap <leader>ef <action>(IntroduceField)
 " extract variable （引入变量）的重构操作:将选中的代码片段抽取为一个新的变量，并自动替换选中的代码片段为新的变量引用(Ctrl + Alt + V)
 vmap <leader>ev <action>(IntroduceVariable)
 
+"ctrl+h/l 光标快速到行首或者行尾
+inoremap <C-h> <Home>
+inoremap <C-l> <End>
+nnoremap <C-h> <Home>
+nnoremap <C-l> <End>
+
+
 " ================================================================================================
 " ⭐️⭐️⭐️ Leader Keymaps ⭐️⭐️⭐️ =====================================
 " ================================================================================================
@@ -133,125 +140,12 @@ set which-key
 set notimeout
 
 " ================================================================================================
-" 🌞🌞🌞 目录-食用手册 🌞🌞🌞//配置代码在目录下面
-" ================================================================================================
-
-"===================================== A =====================================
-" a:
-"===================================== B =====================================
-" b:
-"===================================== C =====================================
-" c:  CodeAndClose-[目录]🎈
-" cc: CodeCompletion-自动补全
-" cd: CloseEditor-关闭当前标签页
-" ca: CloseAllEditors-关闭所有标签页
-" co: CloseAllEditorsButActive-关闭其他标签页
-"===================================== D =====================================
-" d: DebugOrDelete-[目录]🎈
-" dp: BreakPoint-打断点/解除断点
-" db: DeBug-调试
-" [V]d: DeleteAndCopyClipboard-在可视模式中：删除选择的文本并复制到剪切板
-"===================================== E =====================================
-" e: ToggleExplorer ⭐️ 激活项目工具窗口
-"===================================== F =====================================
-" f: Find/Format ⭐🎈[目录]
-" ff: FindFile-快速 导航/查找 项目中的其他文件(Ctrl + n)
-" fl: FindFileLocation-将当前编辑的文件在项目视图中进行选中定位(Ctrl+f)
-" ft: FindText-在整个项目中查找指定的文本、关键字或正则表达式，包括代码文件、配置文件和其他文件等(Ctrl + Shift + F)
-" fc: Commands-打开 "Find Action"（查找动作）对话框(Ctrl + Shift + A)
-" fm: Format-重新格式化代码，使其符合预定义的代码样式和规范 and 优化导入语句，删除未使用的导入，并将导入语句按字母顺序进行排列
-"===================================== G =====================================
-" g: GitOrGenerate 🎈[目录]
-" gr: RollbackHunk-执行版本控制（VCS）的回滚操作，将修改的代码还原到之前的版本
-" gc: GenerateConstructor-生成构造函数
-" gg: GenerateGetter-生成getter函数
-" gs: GenerateSetter-生成setter函数
-" ga: GenerateGetterAndSetter-生成getter和setter函数
-" ge: GenerateEquals-生成equals和hashcode的重写方法
-" go: OverrideMethods-生成重写方法
-" gd: ShowTabbedFileHistory-显示文件的版本控制历史(git)
-"===================================== H =====================================
-" h: MoveToLeftMoveToLeft-跳转到左边的分割窗口
-"===================================== I =====================================
-" i: Insert ⭐快速查找并跳转到下一个以 ( 开始的函数或方法调用的位置️
-"===================================== J =====================================
-" j: MoveToDown-跳转到下边的分割窗口
-"===================================== K =====================================
-" k: MoveToUp-跳转到上边的分割窗口
-"===================================== L =====================================
-" l: MoveToRight-跳转到右边的分割窗口
-"===================================== M =====================================
-" m: CodeGlance-打开/关闭地图(需要CodeGlance Pro插件)
-"===================================== N =====================================
-" n: NERDTreeOrNo ⭐️[目录]🎈
-" nn: NERDTreeFocus-将使焦点转移到 NERDTree 窗口(配置在NERDTree专栏)
-" nh: NoHighlight-取消搜索高亮显示
-" nd: NewDir-新建文件夹
-" nc: NewClass-新建类
-"===================================== O =====================================
-" o:
-"===================================== P =====================================
-" p: PasteClipboardDown-从剪切板粘贴到下面行
-" P: PasteClipboardUp-从剪切板粘贴到上面行
-" [V]p: PasteClipboardDown-在可视模式中：从剪切板粘贴到下面行
-" [V]P: PasteClipboardUp-在可视模式中：从剪切板粘贴到上面行
-"===================================== Q =====================================
-" q:
-"===================================== R =====================================
-" r: Run/Re ⭐️[目录]🎈
-" ru: Run-运行
-" rc: RunClass-运行当前编辑器中的文件或类(Shift + F10)
-" rr: ReRun-重新运行最近一次运行的程序或测试(Ctrl + Shift + F10)
-" rt: ReRunTests-重新运行最近一次运行的测试（Unit Tests）(Ctrl + Shift + F10)
-" rn: Rename-在代码中快速更改一个标识符的名称，并自动处理所有相关的引用(Shift + F6)
-"===================================== S =====================================
-" s: Show ⭐️[目录]🎈
-" st: Stop
-" ss: ShowFileStructure-显示当前打开文件的文件结构弹出窗口，其中包含文件中的类、方法、字段等结构(Alt + 7)
-" sb: ShowBookmarks-显示书签（Bookmarks）工具窗口，其中包含当前文件中设置的书签列表(Ctrl + F11)
-" sp: ShowParameterInfo-用于显示方法或函数的参数信息(Ctrl + p)
-"===================================== T =====================================
-" t: Translate-翻译(需要Translate插件)
-"===================================== U =====================================
-" u:
-"===================================== V =====================================
-" v:
-"===================================== W =====================================
-" w: Window ⭐️[目录]🎈
-" wc: CloseSplitTab-关闭当前分割窗口(ctrl+w+c)
-" wu: Unsplit-恢复当前分割窗口
-" wa: UnsplitAll-恢复所有分割窗口
-" wml: MoveTabRight-向右拆分标签页
-" wmd: MoveTabDown-向下拆分标签页
-" wmc: SplitVertically-向右复制标签页
-" wmo: MoveEditorToOppositeTabGroup-在另一边打开（前提是有另一边的分割窗口）
-" wl: MoveToRight-跳转到右边的窗口(<c-w>l)
-" wh: MoveToLeft-跳转到左边的窗口(<c-w>h)
-" wk: MoveToUp-跳转到上边的窗口(<c-w>k)
-" wj: MoveToDown-跳转到下边的窗口(<c-w>j)
-" wwa: HideActiveWindow-关闭提示窗口(Shift+Esc)
-"===================================== X =====================================
-" x:
-"===================================== Y =====================================
-" y: CopyClipboard-将选中行复制到剪切板
-" [V]y: CopyClipboard-在可视模式中：将选中文字复制到剪切板
-"===================================== Z =====================================
-" z: zip(fold) ⭐️[目录]🎈
-" zo: unZipAll-展开所有代码折叠区域(Ctrl + Shift + 加号键)
-" zc: ZipAll-折叠所有代码折叠区域(Ctrl + Shift + 减号键)
-"=============================================================================
-"=============================================================================
-"=============================================================================
-
-
-
-" ================================================================================================
 " 🌟🌟🌟 <leader>详细配置 🌟🌟🌟
 " ================================================================================================
 
 "========= NULL ========
 "这一行为在按下<leader>后显示的,甭管就行
-let g:WhichKeyDesc_LeaderKeymap= "<leader> 🌟🌟🌟紫色为二级目录🌟🌟🌟"
+let g:WhichKeyDesc_LeaderKeymap= "【紫色为二级目录】"
 
 "========== a ==========
 
@@ -333,6 +227,7 @@ let g:WhichKeyDesc_GitOrGenerate = "<leader>g Git&构造"
 
 "执行版本控制（VCS）的回滚操作，将修改的代码还原到之前的版本
 let g:WhichKeyDesc_GitOrGenerate_RollbackHunk = "<leader>gr git回滚"
+let g:WhichKeyDesc_GitOrGenerate_RollbackHunk2 = "gr git回滚"
 nmap <leader>gr :action Vcs.RollbackChangedLines<CR>
 "生成构造器
 let g:WhichKeyDesc_GitOrGenerate_GenerateConstructor = "<leader>gc 生成构造器"
@@ -350,7 +245,7 @@ nmap <leader>ga <action>(GenerateGetterAndSetter)
 let g:WhichKeyDesc_GitOrGenerate_GenerateEquals = "<leader>ge 生成equals和hashcode的重写"
 nmap <leader>ge <action>(GenerateEquals)
 "生成toString
-let g:WhichKeyDesc_GitOrGenerate_GenerateToString = "<leader>ge 生成toString"
+let g:WhichKeyDesc_GitOrGenerate_GenerateToString = "<leader>gt 生成toString"
 nmap <leader>gt <action>(Actions.ActionsPlugin.GenerateToString)
 "diff 显示文件的版本控制历史(git)
 nmap <leader>gd <action>(Vcs.ShowTabbedFileHistory)
@@ -392,15 +287,15 @@ nmap <leader>l <c-w>l
 
 "========== m ==========
 "打开/关闭 代码小地图
-let g:WhichKeyDesc_CodeGlance = "<leader>m 开关小地图"
-nmap <leader>m <action>(CodeGlance.toggle)
+" let g:WhichKeyDesc_CodeGlance = "<leader>m 开关小地图"
+" nmap <leader>m <action>(CodeGlance.toggle)
 
 
 "========== n ==========
 let g:WhichKeyDesc_NERDTreeOrNew = "<leader>n 目录树&新建"
 
 "取消搜索高亮显示(No Highlight)
-let g:WhichKeyDesc_NERDTreeOrNew_Highlight = "<leader>nh 取消搜索高亮"
+let g:WhichKeyDesc_NERDTreeOrNew_Highlight = "<leader>nl 取消搜索高亮"
 nmap <leader>nl :nohlsearch<CR>
 "在当前目录新建文件夹
 let g:WhichKeyDesc_NERDTreeOrNew_NewDir = "<leader>nd 新建文件夹"
@@ -410,19 +305,27 @@ let g:WhichKeyDesc_NERDTreeOrNew_NewClass = "<leader>nc 新建.Class"
 nmap <leader>nc <action>(NewClass)
 
 
+
 "========== p ==========
 "从剪切板粘贴到下面行
 let g:WhichKeyDesc_PasteClipboardDown = "<leader>p 从剪切板粘贴到下面行"
 nmap <leader>p "+p
 "从剪切板粘贴到上面行
-let g:WhichKeyDesc_PasteClipboardUp = "<leader>P 从剪切板粘贴到上面行"
-nmap <leader>P "+P
+" let g:WhichKeyDesc_PasteClipboardUp = "<leader>P 从剪切板粘贴到上面行"
+" nmap <leader>P "+P
 "在可视模式中：从剪切板粘贴到下面行
 let g:WhichKeyDesc_PasteClipboardDown = "<leader>p 从剪切板粘贴到下面行"
 vmap <leader>p "+p
 "在可视模式中：从剪切板粘贴到上面行
-let g:WhichKeyDesc_PasteClipboardUp = "<leader>P 从剪切板粘贴到上面行"
-vmap <leader>P "+P
+" let g:WhichKeyDesc_PasteClipboardUp = "<leader>P 从剪切板粘贴到上面行"
+" vmap <leader>P "+P
+
+
+
+"========== q ==========
+let g:WhichKeyDesc_CloseContent = "<leader>q 关闭当前标签页"
+nnoremap <Space>q :q<CR>
+
 
 
 "========== r ==========
@@ -461,12 +364,22 @@ nmap <leader>sp <action>(ParameterInfo)
 let g:WhichKeyDesc_Show_Stop = "<leader>st 停止运行"
 nmap <leader>st <action>(Stop) <action>(Stop)
 
-
+hello world!
 "========= t ==========
 "翻译
 let g:WhichKeyDesc_Translate = "<leader>t 翻译"
-nmap <leader>t <action>($EditorTranslateAction)
-vmap <leader>t <action>($EditorTranslateAction)
+nmap <leader>t <action>(Translation.EditorTranslateAction)
+vmap <leader>t <action>(Translation.EditorTranslateAction)
+
+
+"========== v ==========
+
+let g:WhichKeyDesc_RC = "<leader>v 配置文件"
+
+let g:WhichKeyDesc_Edit_RC = "<leader>ve 编辑配置文件"
+nnoremap <leader>ve :e ~/.ideavimrc<CR>
+let g:WhichKeyDesc_Source_RC = "<leader>vs 配置立即生效"
+nnoremap <leader>vs :source ~/.ideavimrc<CR>
 
 
 "========== w ==========
@@ -551,11 +464,8 @@ let g:WhichKeyDesc_NERDTreeOrNo_NERDTreeFocus = "<leader>nn 转移到目录树"
 "按下 <C-n> 将打开 NERDTree 文件资源管理器(==<leader>nn)
 nnoremap <C-n> :NERDTree<CR>
 
-"按下 <C-t> 将切换 NERDTree 文件资源管理器的显示状态，即打开或关闭 NERDTree(不建议)
-nnoremap <C-t> :NERDTreeToggle<CR>
-
 "按下 <C-f> 将在 NERDTree 文件资源管理器中定位当前编辑文件所在的节点，并使其可见(<leader>fl)
-nnoremap <C-f> :NERDTreeFind<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
 
 " ================================================================================================
 " 🌸🌸🌸 Easymotion 🌸🌸🌸
