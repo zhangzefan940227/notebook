@@ -16,7 +16,6 @@ Plug 'terryma/vim-multiple-cursors'
 "Translation
 
 
-
 " ================================================================================================
 " 🐧🐧🐧 Basic settings 🐧🐧🐧
 " ================================================================================================
@@ -121,7 +120,8 @@ inoremap <C-h> <Home>
 inoremap <C-l> <End>
 nnoremap <C-h> <Home>
 nnoremap <C-l> <End>
-
+vnoremap <C-h> <Home>
+vnoremap <C-l> <End>
 
 " ================================================================================================
 " ⭐️⭐️⭐️ Leader Keymaps ⭐️⭐️⭐️ =====================================
@@ -301,10 +301,11 @@ nmap <leader>nl :nohlsearch<CR>
 let g:WhichKeyDesc_NERDTreeOrNew_NewDir = "<leader>nd 新建文件夹"
 nmap <leader>nd <action>(NewDir)
 "在当前目录新建类
-let g:WhichKeyDesc_NERDTreeOrNew_NewClass = "<leader>nc 新建.Class"
+let g:WhichKeyDesc_NERDTreeOrNew_NewClass = "<leader>nc 新建Java文件"
 nmap <leader>nc <action>(NewClass)
 
-
+let g:WhichKeyDesc_NERDTreeOrNew_NewKotlinClass = "<leader>nk 新建Kotlin文件"
+nmap <leader>nk <action>(Kotlin.NewFile)
 
 "========== p ==========
 "从剪切板粘贴到下面行
