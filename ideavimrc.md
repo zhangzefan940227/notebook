@@ -209,8 +209,8 @@ let g:WhichKeyDesc_FindOrFormat_FindText = "<leader>fs 查找字符"
 nmap <leader>fs <action>(Find)
 
 " 在整个项目中查找指定的文本、关键字或正则表达式，包括代码文件、配置文件和其他文件等(Ctrl + Shift + F)
-let g:WhichKeyDesc_FindOrFormat_FindAllText = "<leader>ft 全局查找字符"
-nmap <leader>ft <action>(FindInPath)
+let g:WhichKeyDesc_FindOrFormat_FindAllText = "<leader>fa 全局查找字符"
+nmap <leader>fa <action>(FindInPath)
 
 " 将当前编辑的文件在项目视图中进行选中定位(Alt + F1)
 let g:WhichKeyDesc_FindOrFormat_FindFileLocation = "<leader>fl 定位文件位置"
