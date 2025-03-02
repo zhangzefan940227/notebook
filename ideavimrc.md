@@ -369,8 +369,8 @@ hello world!
 "========= t ==========
 "翻译
 let g:WhichKeyDesc_Translate = "<leader>t 翻译"
-nmap <leader>t <action>(Translation.EditorTranslateAction)
-vmap <leader>t <action>(Translation.EditorTranslateAction)
+nmap <leader>t <action>($EditorTranslateAction)
+vmap <leader>t <action>($EditorTranslateAction)
 
 
 "========== v ==========
@@ -466,7 +466,7 @@ let g:WhichKeyDesc_NERDTreeOrNo_NERDTreeFocus = "<leader>nn 转移到目录树"
 nnoremap <C-n> :NERDTree<CR>
 
 "按下 <C-f> 将在 NERDTree 文件资源管理器中定位当前编辑文件所在的节点，并使其可见(<leader>fl)
-"nnoremap <C-f> :NERDTreeFind<CR>
+"nnoremap <leader>nf :NERDTreeFind<CR>
 
 " ================================================================================================
 " 🌸🌸🌸 Easymotion 🌸🌸🌸
