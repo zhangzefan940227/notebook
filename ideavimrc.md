@@ -115,13 +115,16 @@ vmap <leader>ef <action>(IntroduceField)
 " extract variable （引入变量）的重构操作:将选中的代码片段抽取为一个新的变量，并自动替换选中的代码片段为新的变量引用(Ctrl + Alt + V)
 vmap <leader>ev <action>(IntroduceVariable)
 
-"ctrl+h/l 光标快速到行首或者行尾
+"ctrl+h/l 光标快速到行首或者行尾)
 inoremap <C-h> <Home>
 inoremap <C-l> <End>
 nnoremap <C-h> <Home>
 nnoremap <C-l> <End>
 vnoremap <C-h> <Home>
 vnoremap <C-l> <End>
+
+"取消撤回
+nnoremap U <C-r>
 
 " ================================================================================================
 " ⭐️⭐️⭐️ Leader Keymaps ⭐️⭐️⭐️ =====================================
