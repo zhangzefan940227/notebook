@@ -311,17 +311,10 @@ nmap <leader>nk <action>(Kotlin.NewFile)
 "从剪切板粘贴到下面行
 let g:WhichKeyDesc_PasteClipboardDown = "<leader>p 从剪切板粘贴到下面行"
 nmap <leader>p "+p
-"从剪切板粘贴到上面行
-" let g:WhichKeyDesc_PasteClipboardUp = "<leader>P 从剪切板粘贴到上面行"
-" nmap <leader>P "+P
-"在可视模式中：从剪切板粘贴到下面行
 let g:WhichKeyDesc_PasteClipboardDown = "<leader>p 从剪切板粘贴到下面行"
 vmap <leader>p "+p
-"在可视模式中：从剪切板粘贴到上面行
-" let g:WhichKeyDesc_PasteClipboardUp = "<leader>P 从剪切板粘贴到上面行"
-" vmap <leader>P "+P
 
-
+vnoremap p "_dP
 
 "========== q ==========
 let g:WhichKeyDesc_CloseContent = "<leader>q 关闭当前标签页"
@@ -402,6 +395,7 @@ nmap <leader>wo <action>(MoveEditorToOppositeTabGroup)
 
 "向右复制标签页
 let g:WhichKeyDesc_Windows_SplitVertically = "<leader>wr 向右复制标签页"
+
 nmap <leader>wr <action>(SplitVertically)
 
 " 向下复制标签页
