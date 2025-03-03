@@ -116,11 +116,11 @@ vmap <leader>ef <action>(IntroduceField)
 vmap <leader>ev <action>(IntroduceVariable)
 
 "ctrl+h/l 光标快速到行首或者行尾)
-inoremap <C-h> <Home>
+inoremap <C-h> ^
 inoremap <C-l> <End>
-nnoremap <C-h> <Home>
+nnoremap <C-h> ^
 nnoremap <C-l> <End>
-vnoremap <C-h> <Home>
+vnoremap <C-h> ^
 vnoremap <C-l> <End>
 
 "取消撤回
