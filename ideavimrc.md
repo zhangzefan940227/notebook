@@ -367,7 +367,7 @@ hello world!
 let g:WhichKeyDesc_Translate = "<leader>t 翻译"
 nmap <leader>t <action>($EditorTranslateAction)
 vmap <leader>t <action>($EditorTranslateAction)
-
+"Translation.EditorTranslateAction
 
 "========== v ==========
 
