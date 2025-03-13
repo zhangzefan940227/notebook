@@ -20,3 +20,5 @@
 	email = zzf_zefan@qq.com
 [core]
 	editor = nvim
+[http]
+	sslVerify = false
