@@ -12,13 +12,3 @@
 4. 动画
 5. SurfaceView
 6. Engine 动画
-
-keymap.set("v", "<A-l>", "$")
-keymap.set({"i", "v", "n"}, "J", "<C-o>")
-keymap.set({"i", "v", "n"}, "K", "<C-i>")
-keymap.set({"i", "v", "n"}, "<C-f>", "/")
-
-opt.tabstop=4 -- Number of spaces tabs count for
-opt.expandtab=true
-opt.ruler = false -- Disable the default ruler
-opt.shiftwidth = 4 -- Size of an indent
