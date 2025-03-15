@@ -113,4 +113,4 @@ unsetopt beep
 alias cl='clear'
 alias vim='nvim'
 alias lg='lazygit'
-
+alias vid='neovide'
