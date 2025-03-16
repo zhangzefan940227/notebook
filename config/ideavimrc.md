@@ -344,19 +344,21 @@ let g:WhichKeyDesc_RunOrRe = "<leader>r 运行&重新"
 "运行当前编辑器中的文件或类(Shift + F10)
 let g:WhichKeyDesc_RunOrRe_RunCalss = "<leader>rc 运行当前文件"
 nmap <leader>rc :action RunClass<CR>
+
 "重新运行最近一次运行的程序或测试(Ctrl+Shift + F10)
 let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rr 重新运行"
 nmap <leader>rr <action>(Rerun)
+
 "重新运行最近一次运行的测试（Unit Tests）(Ctrl + Shift + F10)
-let g:WhichKeyDesc_RunOrRe_ReRunTests = "<leader>rt 重新运行Test"
-nmap <leader>rt <action>(RerunTests)
+"let g:WhichKeyDesc_RunOrRe_ReRunTests = "<leader>rt 重新运行Test"
+"nmap <leader>rt <action>(RerunTests)
+
 "在代码中快速更改一个标识符的名称，并自动处理所有相关的引用(Shift + F6)
-let g:WhichKeyDesc_RunOrRe_Rename = "<leader>rn 重构"
-map <leader>rn <action>(RenameElement)
+"let g:WhichKeyDesc_RunOrRe_Rename = "<leader>rn 重构"
+"map <leader>rn <action>(RenameElement)
 "运行
 let g:WhichKeyDesc_RunOrRe_Run = "<leader>ru 运行"
 map <leader>ru <action>(Run)
-
 
 "========== s ==========
 let g:WhichKeyDesc_Show = "<leader>s 显示&停止"
