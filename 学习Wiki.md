@@ -9,6 +9,11 @@
 
 ## 博客
 
+### 2025年3月16日
+[android 14 AMS流程分析](https://blog.csdn.net/temp7695/article/details/136723938)
+
+[Android 14 AMS/WMS分析](https://juejin.cn/post/7338258719790940194)
+
 ### 2025年3月13日
 
 [android 14开机流程详细分析（下） - system service](https://blog.csdn.net/qq_45845172/article/details/140783114)
