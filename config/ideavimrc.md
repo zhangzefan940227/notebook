@@ -105,26 +105,30 @@ nmap K <action>(Forward)
 nmap <C-S> <action>(SaveAll)
 imap <C-S> <Esc><action>(SaveAll)
 
-" e: Extract
-" extract method/function 将选中的代码片段提取为一个独立的方法(Ctrl + Alt + M)
-vmap <leader>em <action>(ExtractMethod)
-" extract constant （引入常量）的重构操作:将选中的代码片段抽取为一个常量，并自动替换选中的代码片段为新的常量引用(Ctrl + Alt + C)
-vmap <leader>ec <action>(IntroduceConstant)
-" extract field （引入字段）的重构操作:将选中的代码片段转化为一个新的字段，并自动将选中的代码片段替换为对该字段的引用(Ctrl + Alt + F)
-vmap <leader>ef <action>(IntroduceField)
-" extract variable （引入变量）的重构操作:将选中的代码片段抽取为一个新的变量，并自动替换选中的代码片段为新的变量引用(Ctrl + Alt + V)
-vmap <leader>ev <action>(IntroduceVariable)
-
-"ctrl+h/l 光标快速到行首或者行尾)
-inoremap <C-h> ^
-inoremap <C-l> <End>
-nnoremap <C-h> ^
-nnoremap <C-l> <End>
-vnoremap <C-h> ^
-vnoremap <C-l> <End>
+"alt+h/l 光标快速到行首或者行尾)
+inoremap <A-h> ^
+inoremap <A-l> <End>
+nnoremap <A-h> ^
+nnoremap <A-l> <End>
+vnoremap <A-h> ^
+vnoremap <A-l> <End>
 
 "取消撤回
 nnoremap U <C-r>
+
+" 映射 Ctrl + h/j/k/l 切换窗口
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+"复制粘贴,都使用系统剪切板
+nnoremap dd "+dd
+vnoremap d "+d
+nnoremap p "+p
+vnoremap p "+p
+nnoremap yy "+yy
+vnoremap y "+y
 
 " ================================================================================================
 " ⭐️⭐️⭐️ Leader Keymaps ⭐️⭐️⭐️ =====================================
@@ -183,12 +187,12 @@ let g:WhichKeyDesc_DebugOrDelete_BreakPoint = "<leader>dp 打断点/解除断点
 nmap <leader>dp <Action>(ToggleLineBreakpoint)
 
 "调试
-let g:WhichKeyDesc_DebugOrDelete_DeBug = "<leader>db 调试"
-nmap <leader>db <Action>(Debug)
+"let g:WhichKeyDesc_DebugOrDelete_DeBug = "<leader>db 调试"
+"nmap <leader>db <Action>(Debug)
 
 " 在可视模式中：删除选择的文本并复制到剪切板
-let g:WhichKeyDesc_DebugOrDelete_DeleteAndCopyToClipboard = "<leader>dd 删除并复制到剪切板"
-vmap <leader>dd "+d
+"let g:WhichKeyDesc_DebugOrDelete_DeleteAndCopyToClipboard = "<leader>dd 删除并复制到剪切板"
+"vmap <leader>dd "+d
 
 
 "========== e ==========
@@ -196,6 +200,17 @@ vmap <leader>dd "+d
 let g:WhichKeyDesc_ToggleExplorerOrExtract = "<leader>e 打开文件列表"
 nmap <leader>e <action>(ActivateProjectToolWindow)
 
+" extract method/function 将选中的代码片段提取为一个独立的方法(Ctrl + Alt + M)
+"vmap <leader>em <action>(ExtractMethod)
+
+" extract constant （引入常量）的重构操作:将选中的代码片段抽取为一个常量，并自动替换选中的代码片段为新的常量引用(Ctrl + Alt + C)
+"vmap <leader>ec <action>(IntroduceConstant)
+
+" extract field （引入字段）的重构操作:将选中的代码片段转化为一个新的字段，并自动将选中的代码片段替换为对该字段的引用(Ctrl + Alt + F)
+"vmap <leader>ef <action>(IntroduceField)
+
+" extract variable （引入变量）的重构操作:将选中的代码片段抽取为一个新的变量，并自动替换选中的代码片段为新的变量引用(Ctrl + Alt + V)
+"vmap <leader>ev <action>(IntroduceVariable)
 
 "========== f ==========
 let g:WhichKeyDesc_FindOrFormat = "<leader>f 查找"
@@ -260,32 +275,32 @@ let g:WhichKeyDesc_DebugOrDelete_OverrideMethods = "<leader>go 生成重写方�
 
 "========== h ==========
 "跳转到左边的分割窗口
-let g:WhichKeyDesc_Show_MoveToLeft = "<leader>h 向左跳转"
-nmap <leader>h <c-w>h
+"let g:WhichKeyDesc_Show_MoveToLeft = "<leader>h 向左跳转"
+"nmap <leader>h <c-w>h
 
 
 "========== i ==========
 "快速查找并跳转到下一个以 ( 开始的函数或方法调用的位置️
-let g:WhichKeyDesc_InsertAfterBrackets = "<leader>i 跳转到选一个("
-nmap <leader>i f(a
+"let g:WhichKeyDesc_InsertAfterBrackets = "<leader>i 跳转到选一个("
+"nmap <leader>i f(a
 
 
 "========== j ==========
 "跳转到下边的分割窗口
-let g:WhichKeyDesc_Show_MoveToDown = "<leader>j 向下跳转"
-nmap <leader>j <c-w>j
+"let g:WhichKeyDesc_Show_MoveToDown = "<leader>j 向下跳转"
+"nmap <leader>j <c-w>j
 
 
 "========== k ==========
 "跳转到上边的分割窗口
-let g:WhichKeyDesc_Show_MoveToUp = "<leader>k 向上跳转"
-nmap <leader>k <c-w>k
+"let g:WhichKeyDesc_Show_MoveToUp = "<leader>k 向上跳转"
+"nmap <leader>k <c-w>k
 
 
 "========== l ==========
 "跳转到右边的窗口
-let g:WhichKeyDesc_Show_MoveToRight = "<leader>l 向右跳转"
-nmap <leader>l <c-w>l
+"let g:WhichKeyDesc_Show_MoveToRight = "<leader>l 向右跳转"
+"nmap <leader>l <c-w>l
 
 
 "========== m ==========
@@ -316,8 +331,6 @@ let g:WhichKeyDesc_PasteClipboardDown = "<leader>p 从剪切板粘贴到下面�
 nmap <leader>p "+p
 let g:WhichKeyDesc_PasteClipboardDown = "<leader>p 从剪切板粘贴到下面行"
 vmap <leader>p "+p
-
-vnoremap p "_dP
 
 "========== q ==========
 let g:WhichKeyDesc_CloseContent = "<leader>q 关闭当前标签页"
@@ -361,18 +374,15 @@ nmap <leader>sp <action>(ParameterInfo)
 let g:WhichKeyDesc_Show_Stop = "<leader>st 停止运行"
 nmap <leader>st <action>(Stop) <action>(Stop)
 
-hello world!
 "========= t ==========
 "翻译
+"ubuntu: Translation.EditorTranslateAction
+"windows: $EditorTranslateAction
 let g:WhichKeyDesc_Translate = "<leader>t 翻译"
 nmap <leader>t <action>($EditorTranslateAction)
 vmap <leader>t <action>($EditorTranslateAction)
-"Translation.EditorTranslateAction
 
 "========== v ==========
-
-let g:WhichKeyDesc_RC = "<leader>v 配置文件"
-
 let g:WhichKeyDesc_Edit_RC = "<leader>ve 编辑配置文件"
 nnoremap <leader>ve :e ~/.ideavimrc<CR>
 let g:WhichKeyDesc_Source_RC = "<leader>vs 配置立即生效"
@@ -385,37 +395,36 @@ let g:WhichKeyDesc_Windows_Hide = "<leader>ww 关闭提示窗口"
 let g:WhichKeyDesc_Windows_Move = "<leader>wm 移动窗口"
 
 " 向右拆分标签页
-let g:WhichKeyDesc_Windows_Move_MoveTabRight = "<leader>wmr 向右拆分标签页"
-nmap <leader>wmr <action>(MoveTabRight)
+let g:WhichKeyDesc_Windows_Move_MoveTabRight = "<leader>wmv 垂直分割并向右拆分标签页"
+nmap <leader>wmv <action>(MoveTabRight)
 
 " 向下拆分标签页
-let g:WhichKeyDesc_Windows_Move_MoveTabDown = "<leader>wmd 向下拆分标签页"
-nmap <leader>wmd <action>(MoveTabDown)
+let g:WhichKeyDesc_Windows_Move_MoveTabDown = "<leader>wmh 水平分割并向下拆分标签页"
+nmap <leader>wmh <action>(MoveTabDown)
 
 "在另一边打开（前提是有另一边的分割窗口）
-let g:WhichKeyDesc_Windows_MoveEditorToOppositeTabGroup = "<leader>wo 在另一边打开"
-nmap <leader>wo <action>(MoveEditorToOppositeTabGroup)
+"let g:WhichKeyDesc_Windows_MoveEditorToOppositeTabGroup = "<leader>wo 在另一边打开"
+"nmap <leader>wo <action>(MoveEditorToOppositeTabGroup)
 
 "向右复制标签页
-let g:WhichKeyDesc_Windows_SplitVertically = "<leader>wr 向右复制标签页"
-
-nmap <leader>wr <action>(SplitVertically)
+let g:WhichKeyDesc_Windows_SplitVertically = "<leader>wv 垂直分割"
+nmap <leader>wv <action>(SplitVertically)
 
 " 向下复制标签页
-let g:WhichKeyDesc_Windows_SplitHorizontally = "<leader>wd 向下复制标签页"
-nmap <leader>wd <action>(SplitHorizontally)
+let g:WhichKeyDesc_Windows_SplitHorizontally = "<leader>wh 水平分割"
+nmap <leader>wh <action>(SplitHorizontally)
 
 "取消所有分割窗口
 let g:WhichKeyDesc_Windows_UnsplitAll = "<leader>wa 取消所有分割窗口"
 nmap <leader>wa <action>(UnsplitAll)
 
 "关闭当前窗口或分割窗格
-let g:WhichKeyDesc_Windows_closeActiveWindow = "<leader>wc 关闭当前分割窗口"
-nmap <leader>wc <c-w>c
+let g:WhichKeyDesc_Windows_closeActiveWindow = "<leader>wd 关闭当前分割窗口"
+nmap <leader>wd <c-w>c
 
 "关闭提示窗口
-let g:WhichKeyDesc_Windows_Hide_HideActiveWindow = "<leader>wwa 关闭提示窗口"
-nmap <leader>wwa <action>(HideActiveWindow)
+"let g:WhichKeyDesc_Windows_Hide_HideActiveWindow = "<leader>wwa 关闭提示窗口"
+"nmap <leader>wwa <action>(HideActiveWindow)
 
 " 取消拆分当前分割窗口
 let g:WhichKeyDesc_Windows_Unsplit = "<leader>wu 取消拆分当前分割窗口"
