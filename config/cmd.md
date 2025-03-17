@@ -16,6 +16,9 @@ git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 # fsh
 `git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-fsh`
 
+# cargo
+sudo apt-get install cargo
+
 # wudao
 sudo apt-get install python3
 sudo apt-get install python3-pip
