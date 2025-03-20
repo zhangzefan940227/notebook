@@ -1,3 +1,4 @@
+```bash
 [color]
 	ui = auto
 [alias]
@@ -22,3 +23,5 @@
 	editor = nvim
 [http]
 	sslVerify = false
+
+```
