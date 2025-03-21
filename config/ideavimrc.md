@@ -14,7 +14,7 @@ Plug 'terryma/vim-multiple-cursors'
 "which-key
 "CodeGlance Pro
 "Translation
-
+"Idea-QuickScope
 
 " ================================================================================================
 " 🐧🐧🐧 Basic settings 🐧🐧🐧
@@ -46,7 +46,7 @@ set keep-english-in-normal
 set surround
 set ReplaceWithRegister
 set NERDTree
-
+set quickscope
 set noerrorbells
 set visualbell
 
