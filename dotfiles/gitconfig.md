@@ -1,0 +1,27 @@
+```bash
+[color]
+	ui = auto
+[alias]
+	st = status
+	ci = commit
+	a = add .
+	br = branch
+	bra = branch -a
+	pl = pull
+	cmd = commit --amend
+	re = reset HEAD^
+	reh = reset --hard HEAD^
+	cl = clean -xdf
+	df = diff
+	ro = restore .
+	p = push -u origin main
+
+[user]
+	name = zhangzefan940227
+	email = zzf_zefan@qq.com
+[core]
+	editor = nvim
+[http]
+	sslVerify = false
+
+```

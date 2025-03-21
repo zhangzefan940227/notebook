@@ -1,0 +1,180 @@
+# 知识点记录
+## Android14 系统启动流程
+
+```bash
+system/core/rootdir/init.zygote64.rc
+frameworks/base/cmds/app_process/app_main.cpp -- main()
+frameworks/base/core/jni/AndroidRuntime.cpp -- start()
+frameworks/base/core/java/com/android/internal/os/ZygoteInit.java -- main()
+frameworks/base/core/java/com/android/internal/os/ZygoteInit.java -- preload() 预加载
+通过preload方法预加载系统常用的类、资源和库，能够显著减少应用启动时的延迟，并通过共享这些预加载的内容来降低内存使用，提高系统性能。
+frameworks/base/services/java/com/android/server/SystemServer.java -- main() 启动核心服务
+frameworks/base/services/java/com/android/server/SystemServer.java:
+    
+  startBootstrapServices(t);
+  startCoreServices(t);
+  startOtherServices(t);
+  startApexServices(t);
+
+ 桌面launcher启动
+frameworks/base/services/core/java/com/android/server/wm/ActivityTaskManagerService.java
+systemReady() -> mAtmInternal.startHomeOnAllDisplays() -> startHomeOnAllDisplays() -> mRootWindowContainer.startHomeOnAllDisplays()// 在所有显示器上显示launcher
+frameworks/base/services/core/java/com/android/server/wm/ActivityTaskManagerService.java -- startHomeOnAllDisplays() -> mRootWindowContainer.startHomeOnAllDisplays(userId, reason)
+frameworks/base/services/core/java/com/android/server/wm/RootWindowContainer.java -- startHomeOnAllDisplays() -> startHomeOnDisplay() -> startHomeOnTaskDisplayArea() -> startHomeActivity()
+
+
+```
+
+## **针对设置Fragement类型子界面，可用 adb logcat -s SubSettings 轻松查看进入了哪个界面。**
+
+## **遇到了一个Activity显示白屏的问题**
+发现是重写错了onCreate方法，记录一下两个onCreate方法的区别
+`onCreate(Bundle saveInstanceState)`
+`Bundle savedInstanceState`是用来保存数据，`Activity`要是因为各种原因被销毁了，但是`Bundle savedInstanceState`不会销毁，重启的时候会在`onCreate`这个生命周期的第一个方法中保存下来，系统回调的时候给你用。
+`oncreate(Bundle saveInstanceState,PersisitanbleBundle persistentState)`
+可以将数据更加持久化的保存在`PersisitanbleBundle persistentState`中，同时记得在清单文件中的`Activity`属性中添加`android:persistableMode=“persistAcrossReboots”`，这样之后方可消除空白问题，要是想要获取`PersisitanbleBundle persistentState`数据重写下面方法就行了。
+```java
+@Override
+public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+    super.onSaveInstanceState(outState, outPersistentState);
+  
+}
+```
+
+#a# **FLAG_DISALLOW_INTERCEPT 标志位**
+它主要是禁止 ViewGroup 拦截除了 DOWN 之外的事件，一般通过子 View.requestDisallowInterceptTouchEvent(...) 来设置。
+```java
+//ViewGroup.java dispatchTouchEvent(...)
+final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0; // 2
+```
+
+## **dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent**
+对于ViewGroup
+* dispatchTouchEvent
+  * return super：正常走完事件流动路径
+  * return true：事件停止传递，其他控件不再收到该事件
+  * return false：事件停止向子`View`传递和分发，回传给父控件的`onTouchEvent`处理
+    Activity的`dispatchTouchEvent`只有`return super.dispatchTouchEvent(ev)`才往下走，返回`true`或者`false`事件都会被消费
+* onInterceptTouchEvent
+  * 每个`ViewGroup`每次分发时，调用`onInterceptTouchEvent`判断是否需要拦截，也就是问问自己这个事件要不要自己来处理
+  * return super/false：不会拦截，事件继续向子`View`的`dispatchTouchEvent`传递
+  * return true：拦截事件，由自己处理
+* onTouchEvent
+
+  * return true：消费事件
+  * return false：不消费事件，并让事件继续往父控件的方向从下往上流动
+对于View
+* dispatchTouchEvent
+  * return super：`View`没有拦截器，View类的`super.dispatchTouchEvent()`默认实现会调用`View`自己的`onTouchEvent`
+  * return true：事件终止，停止传递
+  * return false：回溯到父类的`onTouchEvent`
+对于`View.onTouchEvent`，`OnClickListerner.onClick`和`OnTouchListener.onTouch`的优先级
+`View.dispatchTouchEvent` -> `OnTouchListener.onTouch` -> `View.onTouchEvent` -> `View.performClick` -> `OnClickListener.onClick`
+
+
+## @Data 使用
+@Data 注解的主要作用是提高代码的简洁，使用这个注解可以省去代码中大量的get()、 set()、 toString()等方法；
+
+## @AllArgsConstructor
+
+@AllArgsConstructor 是 Lombok 提供的一个注解，用于自动生成一个包含所有参数的构造函数
+
+```java
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class MyClass {
+    private String field1;
+    private int field2;
+    private double field3;
+}
+```
+生成的构造函数如下：
+
+```java
+public MyClass(String field1, int field2, double field3) {
+    this.field1 = field1;
+    this.field2 = field2;
+    this.field3 = field3;
+}
+```
+
+## @NoArgsConstructor
+
+用于自动生成午餐构造函数
+
+## @Builder
+```java
+@Builder
+public class User {
+    private final Integer code = 200;
+    private String username;
+    private String password;
+}
+
+// 编译后：
+public class User {
+    private String username;
+    private String password;
+    User(String username, String password) {
+        this.username = username; this.password = password;
+    }
+    public static User.UserBuilder builder() {
+        return new User.UserBuilder();
+    }
+
+    public static class UserBuilder {
+        private String username;
+        private String password;
+        UserBuilder() {}
+
+        public User.UserBuilder username(String username) {
+            this.username = username;
+            return this;
+        }
+        public User.UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+        public User build() {
+            return new User(this.username, this.password);
+        }
+        public String toString() {
+            return "User.UserBuilder(username=" + this.username + ", password=" + this.password + ")";
+        }
+    }
+}
+
+// 可以进行如下方式调用
+User.builder()
+    .username("zhangsan")
+    .password("abc")
+    .build()
+```
+
+# 计算机网络
+# 1 计算机网络体系分层结构
+- `OSI 体系结构`：应用层，表示层，会话层，运输层，网络层，数据链路层，物理层
+- `TCP / IP 体系结构`：应用层，运输层（TCP或UDP），网际层（IP），网络接口层
+- `五层协议体系结构`：应用层，运输层，网络层，数据链路层，物理层
+# 网络协议
+协议规定了通信实体之间所交换的消息的格式、意义、顺序以及针对收到信息或发生的事件所采取的“动作”（actions）。
+
+三要素：
+- 语法（用来规定信息格式）
+- 语义（用来说明通信双方应当怎么做）
+- 时序（详细说明事件的先后顺序）
+
+分类：
+- 网际层协议：IP协议、ICMP协议、ARP协议、RARP协议
+- 传输层协议：TCP协议、UDP协议
+- 应用层协议：FTP、Telnet、SMTP、HTTP、RIP、NFS、DNS
+
+服务：
+下层为上层提供的功能调用
+```Bash
+请求(Request) ：由服务用户发往服务提供者，请求完成某项工作。
+指示(Indication) ：由服务提供者发往服务用户，指示用户做某件事情。
+响应(Response) ：由服务用户发往服务提供者，作为对指示的响应。
+证实(Confirmation) ：由服务提供者发往服务用户，作为对请求的证实。
+```

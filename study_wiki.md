@@ -5,6 +5,22 @@
 4. [leetcode 刷题顺序、按标签分类、科学刷题](https://blog.csdn.net/fengyuyeguirenenen/article/details/125099023?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170174413116800186543421%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170174413116800186543421&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-125099023-null-null.142^v96^pc_search_result_base7&utm_term=LeetCode%E5%88%B7%E9%A2%98%E9%A1%BA%E5%BA%8F&spm=1018.2226.3001.4187)
 5. [努比亚技术团队](https://www.jianshu.com/u/167b54662111) 性能优化
 6. [AndroidStudy-Github](https://github.com/crazyqiang/AndroidStudy?tab=readme-ov-file)
+
+## HelloZ 功能记录
+以下功能全部用Kotlin写，正好可以学Kotlin
+
+1. 四大基本组件等基础功能
+2. 常用的工具功能
+    1. Excel表格读取和写入
+    2. 文件读取和写入
+    3. zip文件解压
+    4. Json文件读取，并进行数据展示
+
+3. RecycleView
+4. 动画
+5. SurfaceView
+6. Engine 动画
+
 -------------------------------------------------------
 
 ## 博客
