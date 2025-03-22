@@ -56,3 +56,10 @@ plugins=(
     zsh-autosuggestions
 )
 ```
+
+
+
+# Catime
+
+[Releases · vladelaina/Catime](https://github.com/vladelaina/Catime/releases)
+
