@@ -6,6 +6,9 @@
 5. [努比亚技术团队](https://www.jianshu.com/u/167b54662111) 性能优化
 6. [AndroidStudy-Github](https://github.com/crazyqiang/AndroidStudy?tab=readme-ov-file)
 
+## 视频素材
+- 版本控制思想以及版本控制工具Git的使用
+
 ## HelloZ 功能记录
 以下功能全部用Kotlin写，正好可以学Kotlin
 
