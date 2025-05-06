@@ -15,6 +15,7 @@ PPT
 健身
 读书
 专业技能
+英语
 
 ## HelloZ 功能记录
 以下功能全部用Kotlin写，正好可以学Kotlin
