@@ -18,6 +18,7 @@ PPT
 英语
 口语表达
 唱歌
+做菜
 
 ## HelloZ 功能记录
 以下功能全部用Kotlin写，正好可以学Kotlin
