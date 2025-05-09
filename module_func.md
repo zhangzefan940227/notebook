@@ -1,5 +1,3 @@
-代码均使用Kotlin编写。
-
 # 通过xml获取菜单列表项
 
 ```kotlin
@@ -197,4 +195,24 @@ public abstract class Singleton<T> {
     }
 }
 
+```
+
+# Cpp中初始化结构体的常用方式
+
+```c++
+// malloc分配大小为sizeof(struct stru_demo)的内存空间，之后将返回的void指针强制转换为结构体指针，最后赋值给res指针
+struct stru_demo *res = static_cast<struct stru_demo *>(malloc(sizeof(struct stru_demo)));
+
+// 判空，如果内存不足，则直接return
+if (res == nullptr) {
+    ALOGE("%s: The memory is insufficient\n", __LOG_TAG__);
+    return;
+}
+
+// 申请到内存之后，对内存空间内的数据进行初始化
+// 第一个参数：内存地址
+// 第二个参数：每个元素的大小，这里是初始化整个结构体，因此传入结构体的大小
+// 第三个参数：需要初始化的目标值
+// 第四个参数：实际要初始化的字节数
+(void)memset_s(res, sizeof(struct stru_demo), 0, sizeof(struct stru_demo));
 ```
